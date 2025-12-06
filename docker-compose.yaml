@@ -1,0 +1,11 @@
+services:
+  task-manager-backend-database:
+    image: postgres:18-alpine
+    restart: always
+    container_name: task-manager-backend-database
+    ports:
+      - "${DB_HOST_PORT:-7401}:5432"
+    env_file:
+      - .env
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
