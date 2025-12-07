@@ -1,12 +1,4 @@
-import {
-  Body,
-  ConflictException,
-  Controller,
-  HttpCode,
-  NotFoundException,
-  Post,
-  UsePipes,
-} from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, UsePipes } from '@nestjs/common';
 
 import { ZodValidationPipe } from 'src/pipes/ZodValidationPipe.js';
 
@@ -38,11 +30,6 @@ export class AuthController {
   @UsePipes(new ZodValidationPipe(loginBodySchema))
   @HttpCode(200)
   async login(@Body() body: LoginBodySchema) {
-    const foundUser = await this.authService.findByEmail(body.email);
-    if (!foundUser) {
-      throw new NotFoundException('User not found');
-    }
-
     return await this.authService.login(body);
   }
 
@@ -50,12 +37,6 @@ export class AuthController {
   @HttpCode(201)
   @UsePipes(new ZodValidationPipe(registerBodySchema))
   async register(@Body() body: RegisterBodySchema) {
-    const foundUser = await this.authService.findByEmail(body.email);
-
-    if (foundUser) {
-      throw new ConflictException('User already exists');
-    }
-
     await this.authService.register(body);
   }
 }
