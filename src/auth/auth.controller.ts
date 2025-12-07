@@ -1,7 +1,61 @@
-import { Controller } from '@nestjs/common';
-import type { AuthService } from './auth.service.js';
+import {
+  Body,
+  ConflictException,
+  Controller,
+  HttpCode,
+  NotFoundException,
+  Post,
+  UsePipes,
+} from '@nestjs/common';
 
-@Controller()
+import { ZodValidationPipe } from 'src/pipes/ZodValidationPipe.js';
+
+import { z } from 'zod';
+
+import type { AuthUseCase } from 'src/interfaces/usecases/AuthUseCase.js';
+
+const loginBodySchema = z.object({
+  email: z.string(),
+  password: z.string(),
+});
+
+type LoginBodySchema = z.infer<typeof loginBodySchema>;
+
+const registerBodySchema = z.object({
+  name: z.string(),
+  last_name: z.string(),
+  email: z.string(),
+  password: z.string(),
+});
+
+type RegisterBodySchema = z.infer<typeof registerBodySchema>;
+
+@Controller('/auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthUseCase) {}
+
+  @Post('/login')
+  @UsePipes(new ZodValidationPipe(loginBodySchema))
+  @HttpCode(200)
+  async login(@Body() body: LoginBodySchema) {
+    const foundUser = await this.authService.findByEmail(body.email);
+    if (!foundUser) {
+      throw new NotFoundException('User not found');
+    }
+
+    return await this.authService.login(body);
+  }
+
+  @Post('/register')
+  @HttpCode(201)
+  @UsePipes(new ZodValidationPipe(registerBodySchema))
+  async register(@Body() body: RegisterBodySchema) {
+    const foundUser = await this.authService.findByEmail(body.email);
+
+    if (foundUser) {
+      throw new ConflictException('User already exists');
+    }
+
+    await this.authService.register(body);
+  }
 }
