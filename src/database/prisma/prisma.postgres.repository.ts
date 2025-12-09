@@ -1,21 +1,23 @@
 import { Injectable } from '@nestjs/common';
 
-import type { AuthRepository } from 'src/interfaces/respositories/AuthRepository.js';
+import type { AuthRepository } from '../../../src/interfaces/respositories/AuthRepository';
 
 import type { PrismaService } from './prisma.service.js';
 
-import type { AuthResponseDto } from 'src/@types/dto/auth/AuthResponseDto.js';
-import type { LoginRequestDto } from 'src/@types/dto/auth/LoginResquestDto.js';
-import type { RegisterRequestDto } from 'src/@types/dto/auth/ResgisterRequestDto.js';
+import type { AuthResponseDto } from '../../../src/@types/dto/auth/AuthResponseDto';
+import type { LoginRequestDto } from '../../../src/@types/dto/auth/LoginResquestDto';
+import type { RegisterRequestDto } from '../../../src/@types/dto/auth/ResgisterRequestDto';
 
-import { CredentialsError } from 'src/errors/CredentialsError.js';
+import { CredentialsError } from '.../../src/errors/CredentialsError';
 
-import type { User } from 'src/domain/models/User.js';
+import type { User } from '../../../src/domain/models/User';
 
-import { ResourceNotFoundError } from 'src/errors/ResourceNotFoundError.js';
-import { PrismaAuthMapper } from 'src/mappers/prisma/prisma-auth-mapper.js';
-import { comparePassword } from 'src/utils/password.js';
-import { generateUserToken } from 'src/utils/token.js';
+import { ResourceNotFoundError } from '../../../src/errors/ResourceNotFoundError';
+
+import { PrismaAuthMapper } from '../../../src/domain/mappers/prisma/prisma-auth-mapper';
+
+import { comparePassword } from '../../../src/utils/password';
+import { generateUserToken } from '../../../src/utils/token';
 
 @Injectable()
 export class PrismaPostgresRepository implements AuthRepository {

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
-import { AuthUseCase } from 'src/interfaces/usecases/AuthUseCase';
+import { AuthUseCase } from '../interfaces/usecases/AuthUseCase';
 
-import { DatabaseModule } from 'src/database/database.module';
+import { DatabaseModule } from '../database/database.module';
 
 import { AuthController } from './auth.controller';
 

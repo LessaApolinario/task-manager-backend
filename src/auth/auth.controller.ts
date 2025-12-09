@@ -1,10 +1,10 @@
 import { Body, Controller, HttpCode, Post, UsePipes } from '@nestjs/common';
 
-import { ZodValidationPipe } from 'src/pipes/ZodValidationPipe.js';
+import { ZodValidationPipe } from '../pipes/ZodValidationPipe';
 
 import { z } from 'zod';
 
-import type { AuthUseCase } from 'src/interfaces/usecases/AuthUseCase.js';
+import type { AuthUseCase } from '../../src/interfaces/usecases/AuthUseCase';
 
 const loginBodySchema = z.object({
   email: z.string(),

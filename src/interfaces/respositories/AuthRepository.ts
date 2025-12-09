@@ -1,8 +1,8 @@
-import type { AuthResponseDto } from 'src/@types/dto/auth/AuthResponseDto.js';
-import type { LoginRequestDto } from 'src/@types/dto/auth/LoginResquestDto.js';
-import type { RegisterRequestDto } from 'src/@types/dto/auth/ResgisterRequestDto.js';
+import type { AuthResponseDto } from '../../../src/@types/dto/auth/AuthResponseDto';
+import type { LoginRequestDto } from '../../../src/@types/dto/auth/LoginResquestDto';
+import type { RegisterRequestDto } from '../../../src/@types/dto/auth/ResgisterRequestDto';
 
-import type { User } from 'src/domain/models/User.js';
+import type { User } from '../../../src/domain/models/User';
 
 export abstract class AuthRepository {
   abstract login(credentials: LoginRequestDto): Promise<AuthResponseDto>;
