@@ -2,10 +2,10 @@ import type { INestApplication } from '@nestjs/common';
 import { Test, type TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import type { App } from 'supertest/types';
-import { AuthModule } from '../src/auth/auth.module';
-import { AuthService } from '../src/auth/auth.service';
-import { DatabaseModule } from '../src/database/database.module';
-import { CredentialsError } from '../src/errors/CredentialsError';
+import { NotAllowedError } from '../src/domain/errors/NotAllowedError';
+import { AuthModule } from '../src/infra/auth/auth.module';
+import { AuthService } from '../src/infra/auth/auth.service';
+import { DatabaseModule } from '../src/infra/database/database.module';
 import { InMemoryAuthRepository } from '../src/infra/mock/auth/in_memory.auth.respository';
 
 describe('Login integration tests', () => {
@@ -30,7 +30,7 @@ describe('Login integration tests', () => {
         password: 'any_password',
       });
 
-    expect(response).rejects.toThrow(CredentialsError);
+    expect(response).rejects.toThrow(NotAllowedError);
     expect(response.status).toBe(401);
   });
 

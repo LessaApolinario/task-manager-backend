@@ -1,8 +1,8 @@
 import { ArgumentsHost, Catch, HttpException } from '@nestjs/common';
 import { BaseExceptionFilter } from '@nestjs/core';
 
-import { CredentialsError } from '../errors/CredentialsError';
-import { ResourceNotFoundError } from '../errors/ResourceNotFoundError';
+import { NotAllowedError } from '../domain/errors/NotAllowedError';
+import { ResourceNotFoundError } from '../domain/errors/ResourceNotFoundError';
 
 @Catch()
 export class AllExceptionsFilter extends BaseExceptionFilter {
@@ -18,7 +18,7 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
       });
     }
 
-    if (exception instanceof CredentialsError) {
+    if (exception instanceof NotAllowedError) {
       const context = host.switchToHttp();
       const response = context.getResponse();
 

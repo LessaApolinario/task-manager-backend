@@ -1,5 +1,5 @@
-import type { AuthTokenPayload } from '../src/@types/dto/auth/AuthTokenPayload';
-import { generateUserToken, getUserFromToken } from '../src/utils/token';
+import type { AuthTokenPayload } from '../src/domain/@types/dto/auth/AuthTokenPayload';
+import { generateUserToken, getUserFromToken } from '../src/infra/utils/token';
 
 describe('User token unit tests', () => {
   const mockAuthTokenPayload: AuthTokenPayload = {

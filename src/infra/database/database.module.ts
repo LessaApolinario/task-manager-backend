@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
-
-import { AuthRepository } from '../../src/interfaces/respositories/AuthRepository';
-
-import { PrismaService } from './prisma/prisma.service';
-
+import { AuthRepository } from '../../domain/interfaces/respositories/AuthRepository';
 import { PrismaPostgresRepository } from './prisma/prisma.postgres.repository';
+import { PrismaService } from './prisma/prisma.service';
 
 @Module({
   providers: [

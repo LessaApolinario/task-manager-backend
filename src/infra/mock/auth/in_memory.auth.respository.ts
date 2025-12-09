@@ -1,11 +1,11 @@
-import type { AuthResponseDto } from '../../../../src/@types/dto/auth/AuthResponseDto';
-import type { LoginRequestDto } from '../../../../src/@types/dto/auth/LoginResquestDto';
-import type { RegisterRequestDto } from '../../../../src/@types/dto/auth/ResgisterRequestDto';
 import type { User } from '../../../../src/domain/models/User';
-import { CredentialsError } from '../../../../src/errors/CredentialsError';
-import { ResourceNotFoundError } from '../../../../src/errors/ResourceNotFoundError';
-import type { AuthRepository } from '../../../../src/interfaces/respositories/AuthRepository';
-import { comparePassword, hashPassword } from '../../../../src/utils/password';
+import type { AuthResponseDto } from '../../../domain/@types/dto/auth/AuthResponseDto';
+import type { LoginRequestDto } from '../../../domain/@types/dto/auth/LoginResquestDto';
+import type { RegisterRequestDto } from '../../../domain/@types/dto/auth/ResgisterRequestDto';
+import { NotAllowedError } from '../../../domain/errors/NotAllowedError';
+import { ResourceNotFoundError } from '../../../domain/errors/ResourceNotFoundError';
+import { AuthRepository } from '../../../domain/interfaces/respositories/AuthRepository';
+import { comparePassword, hashPassword } from '../../utils/password';
 
 export class InMemoryAuthRepository implements AuthRepository {
   private _users: User[] = [];
@@ -14,7 +14,7 @@ export class InMemoryAuthRepository implements AuthRepository {
     const foundUser = await this.findByEmail(credentials.email);
 
     if (!foundUser) {
-      throw new ResourceNotFoundError('User not found');
+      throw new ResourceNotFoundError();
     }
 
     const isPasswordCorrect = await comparePassword(
@@ -23,7 +23,7 @@ export class InMemoryAuthRepository implements AuthRepository {
     );
 
     if (!isPasswordCorrect) {
-      throw new CredentialsError('Password incorrect');
+      throw new NotAllowedError();
     }
 
     return { token: 'string-token' };
