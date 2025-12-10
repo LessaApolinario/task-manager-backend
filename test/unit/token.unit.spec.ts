@@ -6,9 +6,7 @@ import {
 
 describe('User token unit tests', () => {
   const mockAuthTokenPayload: AuthTokenPayload = {
-    name: 'fake name',
-    last_name: 'fake last name',
-    email: 'email@fake.com',
+    id: 'fake-id',
   };
 
   it('should generate a user token', async () => {
@@ -21,11 +19,6 @@ describe('User token unit tests', () => {
     const decodedUser = getUserFromToken(token);
     expect(decodedUser).toBeTruthy();
     expect(typeof decodedUser).toBe('object');
-    expect(decodedUser).toHaveProperty('name', mockAuthTokenPayload.name);
-    expect(decodedUser).toHaveProperty(
-      'last_name',
-      mockAuthTokenPayload.last_name,
-    );
-    expect(decodedUser).toHaveProperty('email', mockAuthTokenPayload.email);
+    expect(decodedUser).toHaveProperty('id', mockAuthTokenPayload.id);
   });
 });
