@@ -9,12 +9,12 @@ describe('User token unit tests', () => {
     id: 'fake-id',
   };
 
-  it('should generate a user token', async () => {
+  it('should generate a user token', () => {
     const token = generateUserToken(mockAuthTokenPayload);
     expect(token).toBeTruthy();
   });
 
-  it('should decode a user token', async () => {
+  it('should decode a user token', () => {
     const token = generateUserToken(mockAuthTokenPayload);
     const decodedUser = getUserFromToken(token);
     expect(decodedUser).toBeTruthy();
