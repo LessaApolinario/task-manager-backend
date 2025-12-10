@@ -1,6 +1,5 @@
 import { ArgumentsHost, Catch, HttpException } from '@nestjs/common';
 import { BaseExceptionFilter } from '@nestjs/core';
-
 import { NotAllowedError } from '../domain/errors/NotAllowedError';
 import { ResourceNotFoundError } from '../domain/errors/ResourceNotFoundError';
 

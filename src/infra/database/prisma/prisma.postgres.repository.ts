@@ -1,15 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { NotAllowedError } from 'src/domain/errors/NotAllowedError';
 import type { AuthResponseDto } from '../../../domain/@types/dto/auth/AuthResponseDto';
 import type { LoginRequestDto } from '../../../domain/@types/dto/auth/LoginResquestDto';
 import type { RegisterRequestDto } from '../../../domain/@types/dto/auth/ResgisterRequestDto';
+import { NotAllowedError } from '../../../domain/errors/NotAllowedError';
 import { ResourceNotFoundError } from '../../../domain/errors/ResourceNotFoundError';
 import { AuthRepository } from '../../../domain/interfaces/respositories/AuthRepository';
-import { PrismaAuthMapper } from '../../../domain/mappers/prisma/prisma-auth-mapper';
 import type { User } from '../../../domain/models/User';
 import { comparePassword } from '../../utils/password';
 import { generateUserToken } from '../../utils/token';
-import { PrismaService } from './prisma.service.js';
+import { PrismaService } from './prisma.service';
 
 @Injectable()
 export class PrismaPostgresRepository implements AuthRepository {
@@ -34,8 +33,7 @@ export class PrismaPostgresRepository implements AuthRepository {
       throw new NotAllowedError();
     }
 
-    const tokenPayload = PrismaAuthMapper.toTokenPayload(user);
-    const token = generateUserToken(tokenPayload);
+    const token = generateUserToken({ id: user.id });
 
     return { token };
   }

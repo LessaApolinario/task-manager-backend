@@ -48,4 +48,8 @@ export class InMemoryAuthRepository implements AuthRepository {
       }) ?? null
     );
   }
+
+  get users() {
+    return this._users;
+  }
 }

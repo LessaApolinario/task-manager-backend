@@ -6,6 +6,7 @@ import { PrismaService } from './prisma/prisma.service';
 @Module({
   providers: [
     PrismaService,
+    PrismaPostgresRepository,
     {
       provide: AuthRepository,
       useClass: PrismaPostgresRepository,
