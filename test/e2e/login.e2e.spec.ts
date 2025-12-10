@@ -2,11 +2,11 @@ import type { INestApplication } from '@nestjs/common';
 import { Test, type TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import type { App } from 'supertest/types';
-import { NotAllowedError } from '../src/domain/errors/NotAllowedError';
-import { AuthModule } from '../src/infra/auth/auth.module';
-import { AuthService } from '../src/infra/auth/auth.service';
-import { DatabaseModule } from '../src/infra/database/database.module';
-import { InMemoryAuthRepository } from '../src/infra/mock/auth/in_memory.auth.respository';
+import { NotAllowedError } from '../../src/domain/errors/NotAllowedError';
+import { AuthModule } from '../../src/infra/auth/auth.module';
+import { AuthService } from '../../src/infra/auth/auth.service';
+import { DatabaseModule } from '../../src/infra/database/database.module';
+import { InMemoryAuthRepository } from '../../src/infra/mock/auth/in_memory.auth.respository';
 
 describe('Login integration tests', () => {
   let app: INestApplication<App>;

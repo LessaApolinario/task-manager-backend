@@ -1,4 +1,4 @@
-import { comparePassword, hashPassword } from '../src/infra/utils/password';
+import { comparePassword, hashPassword } from '../../src/infra/utils/password';
 
 describe('Password hashing unit tests', () => {
   const mockPasswordHash: string =
