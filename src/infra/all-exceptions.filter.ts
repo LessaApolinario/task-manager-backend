@@ -1,6 +1,7 @@
 import { ArgumentsHost, Catch, HttpException } from '@nestjs/common';
 import { BaseExceptionFilter } from '@nestjs/core';
 import { NotAllowedError } from '../domain/errors/NotAllowedError';
+import { ResourceAlreadyExistsError } from '../domain/errors/ResourceAlreadyExistsError';
 import { ResourceNotFoundError } from '../domain/errors/ResourceNotFoundError';
 
 @Catch()
@@ -23,6 +24,17 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
 
       return response.status(401).json({
         statusCode: 401,
+        error: exception.name,
+        message: exception.message,
+      });
+    }
+
+    if (exception instanceof ResourceAlreadyExistsError) {
+      const context = host.switchToHttp();
+      const response = context.getResponse();
+
+      return response.status(409).json({
+        statusCode: 409,
         error: exception.name,
         message: exception.message,
       });

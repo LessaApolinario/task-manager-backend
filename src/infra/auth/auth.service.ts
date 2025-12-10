@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import type { AuthResponseDto } from '../../domain/@types/dto/auth/AuthResponseDto';
 import type { LoginRequestDto } from '../../domain/@types/dto/auth/LoginResquestDto';
+import type { RegisterRequestDto } from '../../domain/@types/dto/auth/ResgisterRequestDto';
 import { NotAllowedError } from '../../domain/errors/NotAllowedError';
 import { ResourceNotFoundError } from '../../domain/errors/ResourceNotFoundError';
 import { AuthUseCase } from '../../domain/interfaces/usecases/AuthUseCase';
@@ -39,6 +40,10 @@ export class AuthService implements AuthUseCase {
     return {
       access_token: this.jwtService.sign(payload),
     };
+  }
+
+  async register(user: RegisterRequestDto): Promise<User> {
+    return this.userUseCase.register(user);
   }
 
   async validateUser({
