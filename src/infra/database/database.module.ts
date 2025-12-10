@@ -12,6 +12,6 @@ import { PrismaService } from './prisma/prisma.service';
       useClass: PrismaPostgresRepository,
     },
   ],
-  exports: [PrismaService, AuthRepository],
+  exports: [PrismaService, PrismaPostgresRepository, AuthRepository],
 })
 export class DatabaseModule {}
