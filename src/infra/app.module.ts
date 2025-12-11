@@ -5,6 +5,7 @@ import { CategoryModule } from './category/category.module';
 import { DatabaseModule } from './database/database.module';
 import { envSchema } from './env/env';
 import { EnvModule } from './env/env.module';
+import { TaskModule } from './task/task.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { EnvModule } from './env/env.module';
     DatabaseModule,
     AuthModule,
     CategoryModule,
+    TaskModule,
   ],
 })
 export class AppModule {}

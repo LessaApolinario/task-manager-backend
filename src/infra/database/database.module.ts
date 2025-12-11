@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { CategoryRepository } from '../../domain/interfaces/respositories/CategoryRepository';
+import { TaskRepository } from '../../domain/interfaces/respositories/TaskRepository';
 import { UserRepository } from '../../domain/interfaces/respositories/UserRepository';
 import { PrismaPostgresCategoryRepository } from './prisma/prisma.postgres.category.repository';
+import { PrismaPostgresTaskRepository } from './prisma/prisma.postgres.task.repository';
 import { PrismaPostgresUserRepository } from './prisma/prisma.postgres.user.repository';
 import { PrismaService } from './prisma/prisma.service';
 
@@ -10,6 +12,7 @@ import { PrismaService } from './prisma/prisma.service';
     PrismaService,
     PrismaPostgresUserRepository,
     PrismaPostgresCategoryRepository,
+    PrismaPostgresTaskRepository,
     {
       provide: UserRepository,
       useClass: PrismaPostgresUserRepository,
@@ -18,6 +21,10 @@ import { PrismaService } from './prisma/prisma.service';
       provide: CategoryRepository,
       useClass: PrismaPostgresCategoryRepository,
     },
+    {
+      provide: TaskRepository,
+      useClass: PrismaPostgresTaskRepository,
+    },
   ],
   exports: [
     PrismaService,
@@ -25,6 +32,8 @@ import { PrismaService } from './prisma/prisma.service';
     UserRepository,
     PrismaPostgresCategoryRepository,
     CategoryRepository,
+    PrismaPostgresTaskRepository,
+    TaskRepository,
   ],
 })
 export class DatabaseModule {}
