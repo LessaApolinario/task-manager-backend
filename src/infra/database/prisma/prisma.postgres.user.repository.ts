@@ -7,8 +7,10 @@ import type { User } from '../../../domain/models/User';
 import { PrismaService } from './prisma.service';
 
 @Injectable()
-export class PrismaPostgresUserRepository implements UserRepository {
-  constructor(private prisma: PrismaService) {}
+export class PrismaPostgresUserRepository extends UserRepository {
+  constructor(private prisma: PrismaService) {
+    super();
+  }
 
   async register(user: RegisterRequestDto): Promise<User> {
     const foundPrismaUser = await this.findByEmail(user.email);
