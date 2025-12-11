@@ -1,0 +1,19 @@
+services:
+  task-manager-backend-database:
+    image: postgres:18-alpine
+    restart: always
+    container_name: task-manager-backend-database
+    ports:
+      - "${POSTGRES_HOST_PORT:-7401}:5432"
+    env_file:
+      - .env
+    volumes:
+      - ./data/pg:/var/lib/postgresql/data
+  task-manager-backend-cache:
+    image: redis:8.4.0-alpine
+    restart: always
+    container_name: task-manager-backend-cache
+    ports:
+      - "${REDIS_HOST_PORT:-2279}:6379"
+    volumes:
+      - ./data/redis:/data
