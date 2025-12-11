@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { CategoryModule } from './category/category.module';
 import { DatabaseModule } from './database/database.module';
 import { envSchema } from './env/env';
 import { EnvModule } from './env/env.module';
@@ -14,6 +15,7 @@ import { EnvModule } from './env/env.module';
     EnvModule,
     DatabaseModule,
     AuthModule,
+    CategoryModule,
   ],
 })
 export class AppModule {}

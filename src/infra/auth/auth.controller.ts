@@ -26,15 +26,15 @@ export class AuthController {
   constructor(private authUseCase: AuthUseCase) {}
 
   @Post('/login')
-  @UsePipes(new ZodValidationPipe(loginBodySchema))
   @HttpCode(200)
+  @UsePipes(new ZodValidationPipe(loginBodySchema))
   async login(@Body() body: LoginBodySchema) {
     return await this.authUseCase.login(body);
   }
 
   @Post('/register')
-  @UsePipes(new ZodValidationPipe(registerBodySchema))
   @HttpCode(201)
+  @UsePipes(new ZodValidationPipe(registerBodySchema))
   async register(@Body() body: RegisterBodySchema) {
     const registeredUser = await this.authUseCase.register(body);
     return {

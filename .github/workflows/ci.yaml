@@ -40,12 +40,13 @@ jobs:
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-      POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+      POSTGRES_HOST: postgres
       POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
-      DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.POSTGRES_HOST }}:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}
+      DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@postgres:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      REDIS_HOST: ${{ secrets.REDIS_HOST }}
+      REDIS_HOST: redis
       REDIS_DB: ${{ secrets.REDIS_DB }}
+      REDIS_PORT: ${{ secrets.REDIS_PORT }}
 
   check-unit-tests:
     runs-on: ubuntu-latest
@@ -90,9 +91,10 @@ jobs:
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-      POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+      POSTGRES_HOST: postgres
       POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
-      DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.POSTGRES_HOST }}:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}
+      DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@postgres:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      REDIS_HOST: ${{ secrets.REDIS_HOST }}
+      REDIS_HOST: redis
       REDIS_DB: ${{ secrets.REDIS_DB }}
+      REDIS_PORT: ${{ secrets.REDIS_PORT }}
