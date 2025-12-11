@@ -18,7 +18,7 @@ export class PrismaTaskMapper {
         prismaTask.priority,
       ),
       userId: prismaTask.userId,
-      categoryId: prismaTask.categoryId ?? '',
+      categoryId: prismaTask.categoryId,
       createdAt: prismaTask.createdAt.toISOString(),
       updatedAt: prismaTask.updatedAt.toISOString(),
     };
@@ -35,7 +35,7 @@ export class PrismaTaskMapper {
         task.priority,
       ),
       userId: task.user_id,
-      categoryId: task.category_id ?? '',
+      categoryId: task.category_id ?? null,
     };
   }
 
@@ -51,7 +51,7 @@ export class PrismaTaskMapper {
         task.priority,
       ),
       userId: task.user_id,
-      categoryId: task.category_id ?? '',
+      categoryId: task.category_id ?? null,
     };
   }
 }

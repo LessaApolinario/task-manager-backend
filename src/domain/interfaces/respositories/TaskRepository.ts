@@ -9,5 +9,5 @@ export abstract class TaskRepository {
   abstract remove(id: string): Promise<Task>;
   abstract fetchByUserId(userId: string): Promise<Task[]>;
   abstract fetchByCategoryId(categoryId: string): Promise<Task[]>;
-  abstract findBy(id: string): Promise<Task | null>;
+  abstract findById(id: string): Promise<Task | null>;
 }

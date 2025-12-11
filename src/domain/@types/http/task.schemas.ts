@@ -6,7 +6,7 @@ export const createTaskSchema = z.object({
   priority: z.enum(['LOW', 'MEDIUM', 'HIGH']).default('MEDIUM'),
   status: z.enum(['PENDING', 'IN_PROGRESS', 'COMPLETED']).default('PENDING'),
   user_id: z.string(),
-  category_id: z.string().optional().default(''),
+  category_id: z.string().nullable().optional().default(null),
 });
 
 export type CreateTaskSchema = z.infer<typeof createTaskSchema>;
@@ -18,7 +18,7 @@ export const updateTaskSchema = z.object({
   priority: z.enum(['LOW', 'MEDIUM', 'HIGH']).default('MEDIUM'),
   status: z.enum(['PENDING', 'IN_PROGRESS', 'COMPLETED']).default('PENDING'),
   user_id: z.string(),
-  category_id: z.string().optional().default(''),
+  category_id: z.string().nullable().optional().default(null),
 });
 
 export type UpdateTaskSchema = z.infer<typeof updateTaskSchema>;

@@ -8,5 +8,5 @@ export interface UpdateTaskRequestDto {
   priority: TaskPriority;
   status: TaskStatus;
   user_id: string;
-  category_id?: string;
+  category_id?: string | null;
 }

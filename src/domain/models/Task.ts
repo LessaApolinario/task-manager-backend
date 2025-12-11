@@ -8,7 +8,7 @@ export interface Task {
   status: TaskStatus;
   priority: TaskPriority;
   userId: string;
-  categoryId?: string;
+  categoryId?: string | null;
   createdAt: string;
   updatedAt: string;
 }

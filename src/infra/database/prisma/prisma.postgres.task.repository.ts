@@ -34,9 +34,7 @@ export class PrismaPostgresTaskRepository extends TaskRepository {
   }
 
   async update(category: UpdateTaskRequestDto): Promise<Task> {
-    const foundTask = await this.prisma.task.findUnique({
-      where: { id: category.id },
-    });
+    const foundTask = await this.findById(category.id);
 
     if (!foundTask) {
       throw new ResourceNotFoundError('Task not found');
@@ -51,6 +49,12 @@ export class PrismaPostgresTaskRepository extends TaskRepository {
   }
 
   async remove(id: string): Promise<Task> {
+    const foundTask = await this.findById(id);
+
+    if (!foundTask) {
+      throw new ResourceNotFoundError('Task not found');
+    }
+
     const deletedTask = await this.prisma.task.delete({
       where: { id },
     });
@@ -78,7 +82,7 @@ export class PrismaPostgresTaskRepository extends TaskRepository {
     });
   }
 
-  async findBy(id: string): Promise<Task | null> {
+  async findById(id: string): Promise<Task | null> {
     const foundTask = await this.prisma.task.findUnique({
       where: { id },
     });

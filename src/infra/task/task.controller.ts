@@ -1,9 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
-  Logger,
   Param,
   Post,
   Put,
@@ -37,11 +37,11 @@ export class TaskController {
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ZodValidationPipe(updateTaskSchema))
-  async update(task: UpdateTaskSchema) {
+  async update(@Body() task: UpdateTaskSchema) {
     return this.taskUseCase.update(ZodTaskMapper.zodTaskToUpdateTaskDto(task));
   }
 
-  @Put('/remove/:id')
+  @Delete('/remove/:id')
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   async remove(@Param('id') id: string) {

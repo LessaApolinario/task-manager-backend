@@ -32,7 +32,7 @@ export class TaskService extends TaskUseCase {
     return this.taskRepository.fetchByCategoryId(categoryId);
   }
 
-  findBy(id: string): Promise<Task | null> {
-    return this.taskRepository.findBy(id);
+  findById(id: string): Promise<Task | null> {
+    return this.taskRepository.findById(id);
   }
 }
