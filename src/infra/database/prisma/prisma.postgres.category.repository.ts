@@ -28,7 +28,7 @@ export class PrismaPostgresCategoryRepository extends CategoryRepository {
     }
 
     const createdCategory = await this.prisma.category.create({
-      data: await PrismaCategoryMapper.createDtoToPrismaCategory(category),
+      data: PrismaCategoryMapper.createDtoToPrismaCategory(category),
     });
 
     return {
@@ -47,7 +47,7 @@ export class PrismaPostgresCategoryRepository extends CategoryRepository {
 
     const updatedCategory = await this.prisma.category.update({
       where: { id: category.id },
-      data: await PrismaCategoryMapper.updateDtoToPrismaCategory(category),
+      data: PrismaCategoryMapper.updateDtoToPrismaCategory(category),
     });
 
     return PrismaCategoryMapper.toCategoryModel(updatedCategory);
@@ -74,7 +74,9 @@ export class PrismaPostgresCategoryRepository extends CategoryRepository {
       where: { userId },
     });
 
-    return categories.map(PrismaCategoryMapper.toCategoryModel);
+    return categories.map((category) => {
+      return PrismaCategoryMapper.toCategoryModel(category);
+    });
   }
 
   async findByUserIdAndName(

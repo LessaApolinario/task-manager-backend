@@ -15,9 +15,9 @@ export class PrismaCategoryMapper {
     };
   }
 
-  static async createDtoToPrismaCategory(
+  static createDtoToPrismaCategory(
     category: CreateCategoryRequestDto,
-  ): Promise<Omit<PrismaCategory, 'id' | 'createdAt' | 'updatedAt'>> {
+  ): Omit<PrismaCategory, 'id' | 'createdAt' | 'updatedAt'> {
     return {
       name: category.name,
       color: category.color,
@@ -25,9 +25,9 @@ export class PrismaCategoryMapper {
     };
   }
 
-  static async updateDtoToPrismaCategory(
+  static updateDtoToPrismaCategory(
     category: UpdateCategoryRequestDto,
-  ): Promise<Omit<PrismaCategory, 'createdAt' | 'updatedAt'>> {
+  ): Omit<PrismaCategory, 'createdAt' | 'updatedAt'> {
     return {
       id: category.id,
       name: category.name,
