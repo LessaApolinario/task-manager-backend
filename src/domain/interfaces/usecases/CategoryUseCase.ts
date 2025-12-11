@@ -9,7 +9,7 @@ export abstract class CategoryUseCase {
   ): Promise<DefaultIdResponse>;
   abstract update(category: UpdateCategoryRequestDto): Promise<Category>;
   abstract remove(id: string): Promise<Category>;
-  abstract fetchByUserId(user_id: string): Promise<Category[]>;
+  abstract fetchByUserId(userId: string): Promise<Category[]>;
   abstract findByUserIdAndName(
     userId: string,
     name: string,

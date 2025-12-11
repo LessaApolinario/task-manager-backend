@@ -70,9 +70,9 @@ export class PrismaPostgresCategoryRepository extends CategoryRepository {
     return PrismaCategoryMapper.toCategoryModel(deletedCategory);
   }
 
-  async fetchByUserId(user_id: string): Promise<Category[]> {
+  async fetchByUserId(userId: string): Promise<Category[]> {
     const categories = await this.prisma.category.findMany({
-      where: { userId: user_id },
+      where: { userId },
     });
 
     return categories.map(PrismaCategoryMapper.toCategoryModel);

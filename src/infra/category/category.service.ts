@@ -24,8 +24,8 @@ export class CategoryService extends CategoryUseCase {
     return this.categoryRepository.remove(id);
   }
 
-  fetchByUserId(user_id: string): Promise<Category[]> {
-    return this.categoryRepository.fetchByUserId(user_id);
+  fetchByUserId(userId: string): Promise<Category[]> {
+    return this.categoryRepository.fetchByUserId(userId);
   }
 
   findByUserIdAndName(userId: string, name: string): Promise<Category | null> {
