@@ -37,10 +37,9 @@ export class PrismaPostgresCategoryRepository extends CategoryRepository {
   }
 
   async update(category: UpdateCategoryRequestDto): Promise<Category> {
-    const foundCategory = await this.findByUserIdAndName(
-      category.user_id,
-      category.name,
-    );
+    const foundCategory = await this.prisma.category.findUnique({
+      where: { id: category.id },
+    });
 
     if (!foundCategory) {
       throw new ResourceNotFoundError('Category not found for this user');

@@ -5,8 +5,8 @@ import {
   Get,
   HttpCode,
   Param,
-  Patch,
   Post,
+  Put,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
@@ -44,7 +44,7 @@ export class CategoryController {
     return this.categoryUseCase.create(category);
   }
 
-  @Patch('/update')
+  @Put('/update')
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ZodValidationPipe(updateCategorySchema))
