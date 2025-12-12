@@ -10,6 +10,7 @@ import {
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import {
   createTaskSchema,
   updateTaskSchema,
@@ -19,23 +20,37 @@ import {
 import { TaskUseCase } from '../../domain/interfaces/usecases/TaskUseCase';
 import { ZodTaskMapper } from '../../domain/mappers/zod/zod-task.mapper';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CreateTaskApiRequest } from '../decorators/http/swagger/task/create-task.request.swagger';
+import { CreateTaskApiResponse } from '../decorators/http/swagger/task/create-task.response.swagger';
+import { FetchTasksByCategoryIdApiResponse } from '../decorators/http/swagger/task/fetch-by-category-id.response.swagger';
+import { FetchTasksByUserIdApiResponse } from '../decorators/http/swagger/task/fetch-by-user-id.response.swagger';
+import { RemoveTaskApiResponse } from '../decorators/http/swagger/task/remove-task.response.swagger';
+import { UpdateTaskApiRequest } from '../decorators/http/swagger/task/update-task.request.swagger';
+import { UpdateTaskApiResponse } from '../decorators/http/swagger/task/update-task.response.swagger';
 import { ZodValidationPipe } from '../pipes/ZodValidationPipe';
 
+@ApiTags('task')
 @Controller('/task')
 export class TaskController {
   constructor(private taskUseCase: TaskUseCase) {}
 
   @Post('/create')
   @HttpCode(201)
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ZodValidationPipe(createTaskSchema))
+  @CreateTaskApiRequest()
+  @CreateTaskApiResponse()
   async create(@Body() task: CreateTaskSchema) {
     return this.taskUseCase.create(ZodTaskMapper.zodTaskToCreateTaskDto(task));
   }
 
   @Put('/update')
   @HttpCode(200)
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
+  @UpdateTaskApiRequest()
+  @UpdateTaskApiResponse()
   @UsePipes(new ZodValidationPipe(updateTaskSchema))
   async update(@Body() task: UpdateTaskSchema) {
     return this.taskUseCase.update(ZodTaskMapper.zodTaskToUpdateTaskDto(task));
@@ -43,21 +58,27 @@ export class TaskController {
 
   @Delete('/remove/:id')
   @HttpCode(200)
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
+  @RemoveTaskApiResponse()
   async remove(@Param('id') id: string) {
     return this.taskUseCase.remove(id);
   }
 
   @Get('/tasks/user/:user_id')
   @HttpCode(200)
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
+  @FetchTasksByUserIdApiResponse()
   async fetchByUserId(@Param('user_id') userId: string) {
     return this.taskUseCase.fetchByUserId(userId);
   }
 
   @Get('/tasks/category/:category_id')
   @HttpCode(200)
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
+  @FetchTasksByCategoryIdApiResponse()
   async fetchByCategoryId(@Param('category_id') categoryId: string) {
     return this.taskUseCase.fetchByCategoryId(categoryId);
   }

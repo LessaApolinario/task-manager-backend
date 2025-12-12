@@ -1,44 +1,40 @@
 import { applyDecorators } from '@nestjs/common';
 import {
+  ApiBadRequestResponse,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
-export function FetchCategoriesApiResponse() {
+export function UpdateTaskApiResponse() {
   return applyDecorators(
     ApiOkResponse({
-      description: 'Lista de categorias do usuário',
+      description: 'Tarefa atualizada com sucesso',
       schema: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            id: { type: 'string' },
-            name: { type: 'string' },
-            color: { type: 'string' },
-            user_id: { type: 'string' },
-          },
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          title: { type: 'string' },
+          description: { type: 'string', nullable: true },
+          priority: { type: 'string' },
+          status: { type: 'string' },
+          user_id: { type: 'string' },
+          category_id: { type: 'string', nullable: true },
         },
-        example: [
-          {
-            id: '123',
-            name: 'Work',
-            color: '#FFAA00',
-            user_id: 'uuid',
-          },
-          {
-            id: '456',
-            name: 'Study',
-            color: '#00AAFF',
-            user_id: 'uuid',
-          },
-        ],
+        example: {
+          id: 'task-123',
+          title: 'Atualizar documentação da API',
+          description: 'Melhorar a documentação da API para o projeto X',
+          priority: 'MEDIUM',
+          status: 'IN_PROGRESS',
+          user_id: 'user-123',
+          category_id: 'cat-123',
+        },
       },
     }),
     ApiNotFoundResponse({
-      description: 'Recurso não encontrado',
+      description: 'Tarefa não encontrada',
       schema: {
         type: 'object',
         properties: {
@@ -49,7 +45,7 @@ export function FetchCategoriesApiResponse() {
         example: {
           statusCode: 404,
           error: 'ResourceNotFoundError',
-          message: 'Resource not found',
+          message: 'Task not found',
         },
       },
     }),
@@ -65,7 +61,23 @@ export function FetchCategoriesApiResponse() {
         example: {
           statusCode: 401,
           error: 'NotAllowedError | Unauthorized',
-          message: 'Not allowed',
+          message: 'Unauthorized',
+        },
+      },
+    }),
+    ApiBadRequestResponse({
+      description: 'Payload inválido',
+      schema: {
+        type: 'object',
+        properties: {
+          statusCode: { type: 'number' },
+          error: { type: 'string' },
+          message: { type: 'string' },
+        },
+        example: {
+          statusCode: 400,
+          error: 'BadRequestException',
+          message: 'Validation failed',
         },
       },
     }),

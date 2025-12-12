@@ -55,7 +55,7 @@ export function LoginApiResponse() {
       },
     }),
     ApiInternalServerErrorResponse({
-      description: 'Erro inesperado',
+      description: 'Erro interno do servidor',
       schema: {
         type: 'object',
         properties: {

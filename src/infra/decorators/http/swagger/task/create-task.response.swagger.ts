@@ -1,44 +1,24 @@
 import { applyDecorators } from '@nestjs/common';
 import {
+  ApiBadRequestResponse,
+  ApiConflictResponse,
+  ApiCreatedResponse,
   ApiInternalServerErrorResponse,
-  ApiNotFoundResponse,
-  ApiOkResponse,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
-export function FetchCategoriesApiResponse() {
+export function CreateTaskApiResponse() {
   return applyDecorators(
-    ApiOkResponse({
-      description: 'Lista de categorias do usuário',
+    ApiCreatedResponse({
+      description: 'Tarefa criada com sucesso',
       schema: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            id: { type: 'string' },
-            name: { type: 'string' },
-            color: { type: 'string' },
-            user_id: { type: 'string' },
-          },
-        },
-        example: [
-          {
-            id: '123',
-            name: 'Work',
-            color: '#FFAA00',
-            user_id: 'uuid',
-          },
-          {
-            id: '456',
-            name: 'Study',
-            color: '#00AAFF',
-            user_id: 'uuid',
-          },
-        ],
+        type: 'object',
+        properties: { id: { type: 'string' } },
+        example: { id: 'task-123' },
       },
     }),
-    ApiNotFoundResponse({
-      description: 'Recurso não encontrado',
+    ApiConflictResponse({
+      description: 'Esta tarefa já existe',
       schema: {
         type: 'object',
         properties: {
@@ -47,9 +27,9 @@ export function FetchCategoriesApiResponse() {
           message: { type: 'string' },
         },
         example: {
-          statusCode: 404,
-          error: 'ResourceNotFoundError',
-          message: 'Resource not found',
+          statusCode: 409,
+          error: 'ResourceAlreadyExistsError',
+          message: 'Task already exists',
         },
       },
     }),
@@ -65,12 +45,28 @@ export function FetchCategoriesApiResponse() {
         example: {
           statusCode: 401,
           error: 'NotAllowedError | Unauthorized',
-          message: 'Not allowed',
+          message: 'Unauthorized',
+        },
+      },
+    }),
+    ApiBadRequestResponse({
+      description: 'Payload inválido',
+      schema: {
+        type: 'object',
+        properties: {
+          statusCode: { type: 'number' },
+          error: { type: 'string' },
+          message: { type: 'string' },
+        },
+        example: {
+          statusCode: 400,
+          error: 'BadRequestException',
+          message: 'Validation failed',
         },
       },
     }),
     ApiInternalServerErrorResponse({
-      description: 'Erro interno do servidor',
+      description: 'Unexpected error',
       schema: {
         type: 'object',
         properties: {

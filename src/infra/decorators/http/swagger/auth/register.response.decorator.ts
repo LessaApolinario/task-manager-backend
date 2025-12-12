@@ -60,7 +60,7 @@ export function RegisterUserApiResponse() {
       },
     }),
     ApiInternalServerErrorResponse({
-      description: 'Erro inesperado',
+      description: 'Erro interno do servidor',
       schema: {
         allOf: [
           {

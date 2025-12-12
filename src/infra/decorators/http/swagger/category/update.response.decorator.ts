@@ -76,7 +76,7 @@ export function UpdateCategoryApiResponse() {
       },
     }),
     ApiInternalServerErrorResponse({
-      description: 'Erro inesperado',
+      description: 'Erro interno do servidor',
       schema: {
         type: 'object',
         properties: {
