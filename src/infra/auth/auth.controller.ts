@@ -2,10 +2,10 @@ import { Body, Controller, HttpCode, Post, UsePipes } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { z } from 'zod';
 import { AuthUseCase } from '../../domain/interfaces/usecases/AuthUseCase';
-import { LoginApiRequest } from '../decorators/http/swagger/login/login.request.decorator';
-import { LoginApiResponse } from '../decorators/http/swagger/login/login.response.decorator';
-import { RegisterUserApiRequest } from '../decorators/http/swagger/register/register.request.decorator';
-import { RegisterUserApiResponse } from '../decorators/http/swagger/register/register.response.decorator';
+import { LoginApiRequest } from '../decorators/http/swagger/auth/login.request.decorator';
+import { LoginApiResponse } from '../decorators/http/swagger/auth/login.response.decorator';
+import { RegisterUserApiRequest } from '../decorators/http/swagger/auth/register.request.decorator';
+import { RegisterUserApiResponse } from '../decorators/http/swagger/auth/register.response.decorator';
 import { ZodValidationPipe } from '../pipes/ZodValidationPipe';
 import { Public } from './public';
 
