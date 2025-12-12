@@ -1,5 +1,5 @@
-import type { RegisterRequestDto } from '../../@types/dto/auth/ResgisterRequestDto';
-import type { User } from '../../models/User';
+import { RegisterRequestDto } from '../../@types/dto/auth/ResgisterRequestDto';
+import { User } from '../../models/User';
 
 export abstract class UserRepository {
   abstract register(user: RegisterRequestDto): Promise<User>;

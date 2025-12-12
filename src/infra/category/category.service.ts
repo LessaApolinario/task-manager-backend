@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import type { DefaultIdResponse } from '../../domain/@types/DefaultIdResponse';
-import type { CreateCategoryRequestDto } from '../../domain/@types/dto/category/CreateCategoryRequestDto';
-import type { UpdateCategoryRequestDto } from '../../domain/@types/dto/category/UpdateCategoryRequestDto';
+import { DefaultIdResponse } from '../../domain/@types/DefaultIdResponse';
+import { CreateCategoryRequestDto } from '../../domain/@types/dto/category/CreateCategoryRequestDto';
+import { UpdateCategoryRequestDto } from '../../domain/@types/dto/category/UpdateCategoryRequestDto';
 import { CategoryRepository } from '../../domain/interfaces/respositories/CategoryRepository';
 import { CategoryUseCase } from '../../domain/interfaces/usecases/CategoryUseCase';
-import type { Category } from '../../domain/models/Category';
+import { Category } from '../../domain/models/Category';
 
 @Injectable()
 export class CategoryService extends CategoryUseCase {

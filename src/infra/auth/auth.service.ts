@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import type { AuthResponseDto } from '../../domain/@types/dto/auth/AuthResponseDto';
-import type { LoginRequestDto } from '../../domain/@types/dto/auth/LoginResquestDto';
-import type { RegisterRequestDto } from '../../domain/@types/dto/auth/ResgisterRequestDto';
+import { AuthResponseDto } from '../../domain/@types/dto/auth/AuthResponseDto';
+import { LoginRequestDto } from '../../domain/@types/dto/auth/LoginResquestDto';
+import { RegisterRequestDto } from '../../domain/@types/dto/auth/ResgisterRequestDto';
 import { NotAllowedError } from '../../domain/errors/NotAllowedError';
 import { ResourceNotFoundError } from '../../domain/errors/ResourceNotFoundError';
 import { AuthUseCase } from '../../domain/interfaces/usecases/AuthUseCase';
 import { UserUseCase } from '../../domain/interfaces/usecases/UserUseCase';
-import type { User } from '../../domain/models/User';
+import { User } from '../../domain/models/User';
 import { comparePassword } from '../utils/password';
 
 @Injectable()

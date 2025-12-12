@@ -1,7 +1,7 @@
 import { Task as PrismaTask } from '../../../../generated/prisma/client';
-import type { CreateTaskRequestDto } from '../../@types/dto/task/CreateTaskRequestDto';
-import type { UpdateTaskRequestDto } from '../../@types/dto/task/UpdateTaskRequestDto';
-import type { Task } from '../../models/Task';
+import { CreateTaskRequestDto } from '../../@types/dto/task/CreateTaskRequestDto';
+import { UpdateTaskRequestDto } from '../../@types/dto/task/UpdateTaskRequestDto';
+import { Task } from '../../models/Task';
 import { PrismaTaskPriorityMapper } from './prisma.task-priority.mapper';
 import { PrismaTaskStatusMapper } from './prisma.task-status.mapper';
 

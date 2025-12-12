@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import type { DefaultIdResponse } from '../../domain/@types/DefaultIdResponse';
-import type { CreateTaskRequestDto } from '../../domain/@types/dto/task/CreateTaskRequestDto';
-import type { UpdateTaskRequestDto } from '../../domain/@types/dto/task/UpdateTaskRequestDto';
+import { DefaultIdResponse } from '../../domain/@types/DefaultIdResponse';
+import { CreateTaskRequestDto } from '../../domain/@types/dto/task/CreateTaskRequestDto';
+import { UpdateTaskRequestDto } from '../../domain/@types/dto/task/UpdateTaskRequestDto';
 import { TaskRepository } from '../../domain/interfaces/respositories/TaskRepository';
 import { TaskUseCase } from '../../domain/interfaces/usecases/TaskUseCase';
-import type { Task } from '../../domain/models/Task';
+import { Task } from '../../domain/models/Task';
 
 @Injectable()
 export class TaskService extends TaskUseCase {

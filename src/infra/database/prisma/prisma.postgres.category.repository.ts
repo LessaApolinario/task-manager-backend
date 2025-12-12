@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import type { DefaultIdResponse } from '../../../domain/@types/DefaultIdResponse';
-import type { CreateCategoryRequestDto } from '../../../domain/@types/dto/category/CreateCategoryRequestDto';
-import type { UpdateCategoryRequestDto } from '../../../domain/@types/dto/category/UpdateCategoryRequestDto';
+import { DefaultIdResponse } from '../../../domain/@types/DefaultIdResponse';
+import { CreateCategoryRequestDto } from '../../../domain/@types/dto/category/CreateCategoryRequestDto';
+import { UpdateCategoryRequestDto } from '../../../domain/@types/dto/category/UpdateCategoryRequestDto';
 import { ResourceAlreadyExistsError } from '../../../domain/errors/ResourceAlreadyExistsError';
 import { ResourceNotFoundError } from '../../../domain/errors/ResourceNotFoundError';
 import { CategoryRepository } from '../../../domain/interfaces/respositories/CategoryRepository';
 import { PrismaCategoryMapper } from '../../../domain/mappers/prisma/category.mapper';
-import type { Category } from '../../../domain/models/Category';
+import { Category } from '../../../domain/models/Category';
 import { PrismaService } from './prisma.service';
 
 @Injectable()

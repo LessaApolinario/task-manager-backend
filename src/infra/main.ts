@@ -1,4 +1,4 @@
-import type { INestApplication } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AllExceptionsFilter } from './all-exceptions.filter';

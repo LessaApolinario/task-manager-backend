@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateCategoryRequestDto {
+export class ErrorResponse {
   @ApiProperty()
-  name: string;
+  statusCode: number;
 
   @ApiProperty()
-  color: string;
+  error: string;
 
   @ApiProperty()
-  user_id: string;
+  message: string;
 }

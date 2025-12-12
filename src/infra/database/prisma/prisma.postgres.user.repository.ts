@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import type { RegisterRequestDto } from '../../../domain/@types/dto/auth/ResgisterRequestDto';
+import { RegisterRequestDto } from '../../../domain/@types/dto/auth/ResgisterRequestDto';
 import { ResourceAlreadyExistsError } from '../../../domain/errors/ResourceAlreadyExistsError';
 import { UserRepository } from '../../../domain/interfaces/respositories/UserRepository';
 import { PrismaUserMapper } from '../../../domain/mappers/prisma/prisma.user.mapper';
-import type { User } from '../../../domain/models/User';
+import { User } from '../../../domain/models/User';
 import { PrismaService } from './prisma.service';
 
 @Injectable()

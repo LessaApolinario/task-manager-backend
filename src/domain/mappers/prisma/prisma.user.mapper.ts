@@ -1,7 +1,7 @@
 import { User as PrismaUser } from '../../../../generated/prisma/client';
 import { hashPassword } from '../../../infra/utils/password';
-import type { RegisterRequestDto } from '../../@types/dto/auth/ResgisterRequestDto';
-import type { User } from '../../models/User';
+import { RegisterRequestDto } from '../../@types/dto/auth/ResgisterRequestDto';
+import { User } from '../../models/User';
 
 export class PrismaUserMapper {
   static toUserModel(prismaUser: PrismaUser): User {

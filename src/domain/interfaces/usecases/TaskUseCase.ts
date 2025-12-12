@@ -1,7 +1,7 @@
-import type { DefaultIdResponse } from '../../@types/DefaultIdResponse';
-import type { CreateTaskRequestDto } from '../../@types/dto/task/CreateTaskRequestDto';
-import type { UpdateTaskRequestDto } from '../../@types/dto/task/UpdateTaskRequestDto';
-import type { Task } from '../../models/Task';
+import { DefaultIdResponse } from '../../@types/DefaultIdResponse';
+import { CreateTaskRequestDto } from '../../@types/dto/task/CreateTaskRequestDto';
+import { UpdateTaskRequestDto } from '../../@types/dto/task/UpdateTaskRequestDto';
+import { Task } from '../../models/Task';
 
 export abstract class TaskUseCase {
   abstract create(task: CreateTaskRequestDto): Promise<DefaultIdResponse>;

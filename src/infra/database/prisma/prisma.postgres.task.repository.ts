@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import type { DefaultIdResponse } from '../../../domain/@types/DefaultIdResponse';
-import type { CreateTaskRequestDto } from '../../../domain/@types/dto/task/CreateTaskRequestDto';
-import type { UpdateTaskRequestDto } from '../../../domain/@types/dto/task/UpdateTaskRequestDto';
+import { DefaultIdResponse } from '../../../domain/@types/DefaultIdResponse';
+import { CreateTaskRequestDto } from '../../../domain/@types/dto/task/CreateTaskRequestDto';
+import { UpdateTaskRequestDto } from '../../../domain/@types/dto/task/UpdateTaskRequestDto';
 import { ResourceAlreadyExistsError } from '../../../domain/errors/ResourceAlreadyExistsError';
 import { ResourceNotFoundError } from '../../../domain/errors/ResourceNotFoundError';
 import { TaskRepository } from '../../../domain/interfaces/respositories/TaskRepository';
 import { PrismaTaskMapper } from '../../../domain/mappers/prisma/prisma.task.mapper';
-import type { Task } from '../../../domain/models/Task';
+import { Task } from '../../../domain/models/Task';
 import { PrismaService } from './prisma.service';
 
 @Injectable()

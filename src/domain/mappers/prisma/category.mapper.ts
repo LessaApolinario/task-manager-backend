@@ -1,7 +1,7 @@
 import { Category as PrismaCategory } from '../../../../generated/prisma/client';
-import type { CreateCategoryRequestDto } from '../../@types/dto/category/CreateCategoryRequestDto';
-import type { UpdateCategoryRequestDto } from '../../@types/dto/category/UpdateCategoryRequestDto';
-import type { Category } from '../../models/Category';
+import { CreateCategoryRequestDto } from '../../@types/dto/category/CreateCategoryRequestDto';
+import { UpdateCategoryRequestDto } from '../../@types/dto/category/UpdateCategoryRequestDto';
+import { Category } from '../../models/Category';
 
 export class PrismaCategoryMapper {
   static toCategoryModel(prismaCategory: PrismaCategory): Category {

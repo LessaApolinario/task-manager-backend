@@ -1,7 +1,7 @@
-import type { DefaultIdResponse } from '../../@types/DefaultIdResponse';
-import type { CreateCategoryRequestDto } from '../../@types/dto/category/CreateCategoryRequestDto';
-import type { UpdateCategoryRequestDto } from '../../@types/dto/category/UpdateCategoryRequestDto';
-import type { Category } from '../../models/Category';
+import { DefaultIdResponse } from '../../@types/DefaultIdResponse';
+import { CreateCategoryRequestDto } from '../../@types/dto/category/CreateCategoryRequestDto';
+import { UpdateCategoryRequestDto } from '../../@types/dto/category/UpdateCategoryRequestDto';
+import { Category } from '../../models/Category';
 
 export abstract class CategoryRepository {
   abstract create(

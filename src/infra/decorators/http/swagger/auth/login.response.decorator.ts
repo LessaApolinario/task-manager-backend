@@ -3,71 +3,42 @@ import {
   ApiBadRequestResponse,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
-  ApiResponse,
+  ApiOkResponse,
 } from '@nestjs/swagger';
+import { AuthResponseDto } from '../../../../../domain/@types/dto/auth/AuthResponseDto';
+import { ErrorResponse } from '../../../../../domain/@types/http/ErrorResonse';
 
 export function LoginApiResponse() {
   return applyDecorators(
-    ApiResponse({
+    ApiOkResponse({
+      type: AuthResponseDto,
       description: 'Login bem-sucedido',
-      schema: {
-        type: 'object',
-        properties: {
-          access_token: { type: 'string' },
-        },
-        example: {
-          access_token:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
-        },
-      },
-      status: 200,
     }),
     ApiBadRequestResponse({
+      type: ErrorResponse,
       description: 'Payload inválido',
-      schema: {
-        type: 'object',
-        properties: {
-          statusCode: { type: 'number' },
-          error: { type: 'string' },
-          message: { type: 'string' },
-        },
-        example: {
-          statusCode: 400,
-          error: 'Bad Request',
-          message: 'Validation failed',
-        },
+      example: {
+        statusCode: 400,
+        error: 'Bad Request',
+        message: 'Validation failed',
       },
     }),
     ApiNotFoundResponse({
+      type: ErrorResponse,
       description: 'Recurso não encontrado',
-      schema: {
-        type: 'object',
-        properties: {
-          statusCode: { type: 'number' },
-          error: { type: 'string' },
-          message: { type: 'string' },
-        },
-        example: {
-          statusCode: 404,
-          error: 'ResourceNotFoundError',
-          message: 'Resource not found',
-        },
+      example: {
+        statusCode: 404,
+        error: 'ResourceNotFoundError',
+        message: 'Resource not found',
       },
     }),
     ApiInternalServerErrorResponse({
+      type: ErrorResponse,
       description: 'Erro interno do servidor',
-      schema: {
-        type: 'object',
-        properties: {
-          statusCode: { type: 'number' },
-          error: { type: 'string' },
-          message: { type: 'string' },
-        },
-        example: {
-          statusCode: 500,
-          error: 'InternalServerError',
-          message: 'Unexpected error',
-        },
+      example: {
+        statusCode: 500,
+        error: 'InternalServerError',
+        message: 'Unexpected error',
       },
     }),
   );

@@ -1,11 +1,11 @@
-import type { CreateTaskRequestDto } from '../../@types/dto/task/CreateTaskRequestDto';
-import { ZodTaskPriorityMapper } from './zod-task-priority.mapper';
-import { ZodTaskStatusMapper } from './zod-task-status.mapper';
+import { CreateTaskRequestDto } from '../../@types/dto/task/CreateTaskRequestDto';
+import { UpdateTaskRequestDto } from '../../@types/dto/task/UpdateTaskRequestDto';
 import type {
   CreateTaskSchema,
   UpdateTaskSchema,
 } from '../../@types/http/task.schemas';
-import type { UpdateTaskRequestDto } from '../../@types/dto/task/UpdateTaskRequestDto';
+import { ZodTaskPriorityMapper } from './zod-task-priority.mapper';
+import { ZodTaskStatusMapper } from './zod-task-status.mapper';
 
 export class ZodTaskMapper {
   static zodTaskToCreateTaskDto(
