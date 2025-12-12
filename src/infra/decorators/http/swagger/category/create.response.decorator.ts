@@ -1,26 +1,25 @@
 import { applyDecorators } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
+  ApiConflictResponse,
+  ApiCreatedResponse,
   ApiInternalServerErrorResponse,
-  ApiNotFoundResponse,
-  ApiResponse,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
-export function LoginApiResponse() {
+export function CreateCategoryApiResponse() {
   return applyDecorators(
-    ApiResponse({
-      description: 'Login bem-sucedido',
+    ApiCreatedResponse({
+      description: 'Categoria criada com sucesso',
       schema: {
         type: 'object',
         properties: {
-          access_token: { type: 'string' },
+          id: { type: 'string', format: 'uuid' },
         },
         example: {
-          access_token:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+          id: 'b350c037-85d8-4221-9db8-6fdc564b0e57',
         },
       },
-      status: 200,
     }),
     ApiBadRequestResponse({
       description: 'Payload inválido',
@@ -38,8 +37,8 @@ export function LoginApiResponse() {
         },
       },
     }),
-    ApiNotFoundResponse({
-      description: 'Recurso não encontrado',
+    ApiConflictResponse({
+      description: 'Já existe uma categoria com este nome para este usuário',
       schema: {
         type: 'object',
         properties: {
@@ -48,9 +47,25 @@ export function LoginApiResponse() {
           message: { type: 'string' },
         },
         example: {
-          statusCode: 404,
-          error: 'ResourceNotFoundError',
-          message: 'Resource not found',
+          statusCode: 409,
+          error: 'Conflict',
+          message: 'Category already exists for this user',
+        },
+      },
+    }),
+    ApiUnauthorizedResponse({
+      description: 'Token inválido ou ausente',
+      schema: {
+        type: 'object',
+        properties: {
+          statusCode: { type: 'number' },
+          error: { type: 'string' },
+          message: { type: 'string' },
+        },
+        example: {
+          statusCode: 401,
+          error: 'NotAllowedError | Unauthorized',
+          message: 'Not allowed',
         },
       },
     }),

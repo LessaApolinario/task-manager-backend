@@ -19,6 +19,16 @@ function createSwaggerDocs(app: INestApplication) {
   const config = new DocumentBuilder()
     .setTitle('Task management API')
     .setDescription('API for managing tasks and categories')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        description: 'Cole o o token JWT no formato: Bearer {token}',
+        in: 'header',
+      },
+      'access-token',
+    )
     .setVersion('1.0')
     .addTag('tasks')
     .build();

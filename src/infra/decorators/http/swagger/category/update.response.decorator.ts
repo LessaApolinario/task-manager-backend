@@ -3,24 +3,29 @@ import {
   ApiBadRequestResponse,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
-  ApiResponse,
+  ApiOkResponse,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
-export function LoginApiResponse() {
+export function UpdateCategoryApiResponse() {
   return applyDecorators(
-    ApiResponse({
-      description: 'Login bem-sucedido',
+    ApiOkResponse({
+      description: 'Categoria atualizada com sucesso',
       schema: {
         type: 'object',
         properties: {
-          access_token: { type: 'string' },
+          id: { type: 'string' },
+          name: { type: 'string' },
+          color: { type: 'string' },
+          user_id: { type: 'string' },
         },
         example: {
-          access_token:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+          id: 'b350c037-85d8-4221-9db8-6fdc564b0e57',
+          name: 'Work',
+          color: '#00FFAA',
+          user_id: '2f9b605a-9c46-4e32-af3a-fd3e766d7a93',
         },
       },
-      status: 200,
     }),
     ApiBadRequestResponse({
       description: 'Payload inválido',
@@ -51,6 +56,22 @@ export function LoginApiResponse() {
           statusCode: 404,
           error: 'ResourceNotFoundError',
           message: 'Resource not found',
+        },
+      },
+    }),
+    ApiUnauthorizedResponse({
+      description: 'Token inválido ou ausente',
+      schema: {
+        type: 'object',
+        properties: {
+          statusCode: { type: 'number' },
+          error: { type: 'string' },
+          message: { type: 'string' },
+        },
+        example: {
+          statusCode: 401,
+          error: 'NotAllowedError | Unauthorized',
+          message: 'Not allowed',
         },
       },
     }),

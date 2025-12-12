@@ -1,41 +1,40 @@
 import { applyDecorators } from '@nestjs/common';
 import {
-  ApiBadRequestResponse,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
-  ApiResponse,
+  ApiOkResponse,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
-export function LoginApiResponse() {
+export function FetchCategoriesApiResponse() {
   return applyDecorators(
-    ApiResponse({
-      description: 'Login bem-sucedido',
+    ApiOkResponse({
+      description: 'Lista de categorias do usuário',
       schema: {
-        type: 'object',
-        properties: {
-          access_token: { type: 'string' },
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            id: { type: 'string' },
+            name: { type: 'string' },
+            color: { type: 'string' },
+            user_id: { type: 'string' },
+          },
         },
-        example: {
-          access_token:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
-        },
-      },
-      status: 200,
-    }),
-    ApiBadRequestResponse({
-      description: 'Payload inválido',
-      schema: {
-        type: 'object',
-        properties: {
-          statusCode: { type: 'number' },
-          error: { type: 'string' },
-          message: { type: 'string' },
-        },
-        example: {
-          statusCode: 400,
-          error: 'Bad Request',
-          message: 'Validation failed',
-        },
+        example: [
+          {
+            id: '123',
+            name: 'Work',
+            color: '#FFAA00',
+            user_id: 'uuid',
+          },
+          {
+            id: '456',
+            name: 'Study',
+            color: '#00AAFF',
+            user_id: 'uuid',
+          },
+        ],
       },
     }),
     ApiNotFoundResponse({
@@ -51,6 +50,22 @@ export function LoginApiResponse() {
           statusCode: 404,
           error: 'ResourceNotFoundError',
           message: 'Resource not found',
+        },
+      },
+    }),
+    ApiUnauthorizedResponse({
+      description: 'Token inválido ou ausente',
+      schema: {
+        type: 'object',
+        properties: {
+          statusCode: { type: 'number' },
+          error: { type: 'string' },
+          message: { type: 'string' },
+        },
+        example: {
+          statusCode: 401,
+          error: 'NotAllowedError | Unauthorized',
+          message: 'Not allowed',
         },
       },
     }),
