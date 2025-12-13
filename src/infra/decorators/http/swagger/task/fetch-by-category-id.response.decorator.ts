@@ -1,42 +1,28 @@
 import { applyDecorators } from '@nestjs/common';
 import {
   ApiInternalServerErrorResponse,
-  ApiNotFoundResponse,
   ApiOkResponse,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { Task } from '../../../../../domain/models/Task';
 import { ErrorResponse } from '../../../../../domain/@types/http/ErrorResonse';
-import { Category } from '../../../../../domain/models/Category';
 
-export function FetchCategoriesApiResponse() {
+export function FetchTasksByCategoryIdApiResponse() {
   return applyDecorators(
     ApiOkResponse({
-      type: Category,
+      type: Task,
       isArray: true,
-      description: 'Lista de categorias do usuário',
+      description: 'Tarefas buscadas com sucesso',
       example: [
         {
-          id: '123',
-          name: 'Work',
-          color: '#FFAA00',
-          user_id: 'uuid',
-        },
-        {
-          id: '456',
-          name: 'Study',
-          color: '#00AAFF',
-          user_id: 'uuid',
+          id: 'task-123',
+          title: 'Task A',
+          priority: 'MEDIUM',
+          status: 'PENDING',
+          user_id: 'user-1',
+          category_id: 'cat-1',
         },
       ],
-    }),
-    ApiNotFoundResponse({
-      type: ErrorResponse,
-      description: 'Recurso não encontrado',
-      example: {
-        statusCode: 404,
-        error: 'ResourceNotFoundError',
-        message: 'Resource not found',
-      },
     }),
     ApiUnauthorizedResponse({
       type: ErrorResponse,
@@ -44,7 +30,7 @@ export function FetchCategoriesApiResponse() {
       example: {
         statusCode: 401,
         error: 'NotAllowedError | Unauthorized',
-        message: 'Not allowed',
+        message: 'Unauthorized',
       },
     }),
     ApiInternalServerErrorResponse({

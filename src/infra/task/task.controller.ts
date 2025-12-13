@@ -20,13 +20,13 @@ import {
 import { TaskUseCase } from '../../domain/interfaces/usecases/TaskUseCase';
 import { ZodTaskMapper } from '../../domain/mappers/zod/zod-task.mapper';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { CreateTaskApiRequest } from '../decorators/http/swagger/task/create-task.request.swagger';
-import { CreateTaskApiResponse } from '../decorators/http/swagger/task/create-task.response.swagger';
-import { FetchTasksByCategoryIdApiResponse } from '../decorators/http/swagger/task/fetch-by-category-id.response.swagger';
-import { FetchTasksByUserIdApiResponse } from '../decorators/http/swagger/task/fetch-by-user-id.response.swagger';
-import { RemoveTaskApiResponse } from '../decorators/http/swagger/task/remove-task.response.swagger';
-import { UpdateTaskApiRequest } from '../decorators/http/swagger/task/update-task.request.swagger';
-import { UpdateTaskApiResponse } from '../decorators/http/swagger/task/update-task.response.swagger';
+import { CreateTaskApiRequest } from '../decorators/http/swagger/task/create-task.request.decorator';
+import { CreateTaskApiResponse } from '../decorators/http/swagger/task/create-task.response.decorator';
+import { FetchTasksByCategoryIdApiResponse } from '../decorators/http/swagger/task/fetch-by-category-id.response.decorator';
+import { FetchTasksByUserIdApiResponse } from '../decorators/http/swagger/task/fetch-by-user-id.response.decorator';
+import { RemoveTaskApiResponse } from '../decorators/http/swagger/task/remove-task.response.decorator';
+import { UpdateTaskApiRequest } from '../decorators/http/swagger/task/update-task.request.decorator';
+import { UpdateTaskApiResponse } from '../decorators/http/swagger/task/update-task.response.decorator';
 import { ZodValidationPipe } from '../pipes/ZodValidationPipe';
 
 @ApiTags('task')

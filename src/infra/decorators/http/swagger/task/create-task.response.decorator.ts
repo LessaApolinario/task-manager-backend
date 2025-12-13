@@ -9,28 +9,19 @@ import {
 import { DefaultIdResponse } from '../../../../../domain/@types/DefaultIdResponse';
 import { ErrorResponse } from '../../../../../domain/@types/http/ErrorResonse';
 
-export function CreateCategoryApiResponse() {
+export function CreateTaskApiResponse() {
   return applyDecorators(
     ApiCreatedResponse({
       type: DefaultIdResponse,
-      description: 'Categoria criada com sucesso',
-    }),
-    ApiBadRequestResponse({
-      type: ErrorResponse,
-      description: 'Payload inválido',
-      example: {
-        statusCode: 400,
-        error: 'Bad Request',
-        message: 'Validation failed',
-      },
+      description: 'Tarefa criada com sucesso',
     }),
     ApiConflictResponse({
       type: ErrorResponse,
-      description: 'Já existe uma categoria com este nome para este usuário',
+      description: 'Esta tarefa já existe',
       example: {
         statusCode: 409,
-        error: 'Conflict',
-        message: 'Category already exists for this user',
+        error: 'ResourceAlreadyExistsError',
+        message: 'Task already exists',
       },
     }),
     ApiUnauthorizedResponse({
@@ -39,12 +30,21 @@ export function CreateCategoryApiResponse() {
       example: {
         statusCode: 401,
         error: 'NotAllowedError | Unauthorized',
-        message: 'Not allowed',
+        message: 'Unauthorized',
+      },
+    }),
+    ApiBadRequestResponse({
+      type: ErrorResponse,
+      description: 'Payload inválido',
+      example: {
+        statusCode: 400,
+        error: 'BadRequestException',
+        message: 'Validation failed',
       },
     }),
     ApiInternalServerErrorResponse({
       type: ErrorResponse,
-      description: 'Erro interno do servidor',
+      description: 'Unexpected error',
       example: {
         statusCode: 500,
         error: 'InternalServerError',
