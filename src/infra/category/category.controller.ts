@@ -10,10 +10,11 @@ import {
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { z } from 'zod';
 import { CategoryUseCase } from '../../domain/interfaces/usecases/CategoryUseCase';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { SwaggerAuth } from '../decorators/http/swagger/auth/swagger-auth.decorator';
 import { CreateCategoryApiRequest } from '../decorators/http/swagger/category/create.request.decorator';
 import { CreateCategoryApiResponse } from '../decorators/http/swagger/category/create.response.decorator';
 import { FetchCategoriesApiResponse } from '../decorators/http/swagger/category/fetch.response.decorator';
@@ -46,7 +47,7 @@ export class CategoryController {
 
   @Post('/create')
   @HttpCode(201)
-  @ApiBearerAuth()
+  @SwaggerAuth()
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ZodValidationPipe(createCategorySchema))
   @CreateCategoryApiRequest()
@@ -57,7 +58,7 @@ export class CategoryController {
 
   @Put('/update')
   @HttpCode(200)
-  @ApiBearerAuth()
+  @SwaggerAuth()
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ZodValidationPipe(updateCategorySchema))
   @UpdateCategoryApiRequest()
@@ -68,7 +69,7 @@ export class CategoryController {
 
   @Get('/categories/:user_id')
   @HttpCode(200)
-  @ApiBearerAuth()
+  @SwaggerAuth()
   @UseGuards(JwtAuthGuard)
   @FetchCategoriesApiResponse()
   fetchByUserId(@Param('user_id') user_id: string) {
@@ -77,7 +78,7 @@ export class CategoryController {
 
   @Delete('/remove/:id')
   @HttpCode(200)
-  @ApiBearerAuth()
+  @SwaggerAuth()
   @UseGuards(JwtAuthGuard)
   @RemoveCategoryApiResponse()
   remove(@Param('id') id: string) {

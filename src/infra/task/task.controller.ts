@@ -10,7 +10,7 @@ import {
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import {
   createTaskSchema,
   updateTaskSchema,
@@ -20,6 +20,7 @@ import {
 import { TaskUseCase } from '../../domain/interfaces/usecases/TaskUseCase';
 import { ZodTaskMapper } from '../../domain/mappers/zod/zod-task.mapper';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { SwaggerAuth } from '../decorators/http/swagger/auth/swagger-auth.decorator';
 import { CreateTaskApiRequest } from '../decorators/http/swagger/task/create-task.request.decorator';
 import { CreateTaskApiResponse } from '../decorators/http/swagger/task/create-task.response.decorator';
 import { FetchTasksByCategoryIdApiResponse } from '../decorators/http/swagger/task/fetch-by-category-id.response.decorator';
@@ -36,7 +37,7 @@ export class TaskController {
 
   @Post('/create')
   @HttpCode(201)
-  @ApiBearerAuth()
+  @SwaggerAuth()
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ZodValidationPipe(createTaskSchema))
   @CreateTaskApiRequest()
@@ -47,7 +48,7 @@ export class TaskController {
 
   @Put('/update')
   @HttpCode(200)
-  @ApiBearerAuth()
+  @SwaggerAuth()
   @UseGuards(JwtAuthGuard)
   @UpdateTaskApiRequest()
   @UpdateTaskApiResponse()
@@ -58,7 +59,7 @@ export class TaskController {
 
   @Delete('/remove/:id')
   @HttpCode(200)
-  @ApiBearerAuth()
+  @SwaggerAuth()
   @UseGuards(JwtAuthGuard)
   @RemoveTaskApiResponse()
   async remove(@Param('id') id: string) {
@@ -67,7 +68,7 @@ export class TaskController {
 
   @Get('/tasks/user/:user_id')
   @HttpCode(200)
-  @ApiBearerAuth()
+  @SwaggerAuth()
   @UseGuards(JwtAuthGuard)
   @FetchTasksByUserIdApiResponse()
   async fetchByUserId(@Param('user_id') userId: string) {
@@ -76,7 +77,7 @@ export class TaskController {
 
   @Get('/tasks/category/:category_id')
   @HttpCode(200)
-  @ApiBearerAuth()
+  @SwaggerAuth()
   @UseGuards(JwtAuthGuard)
   @FetchTasksByCategoryIdApiResponse()
   async fetchByCategoryId(@Param('category_id') categoryId: string) {
