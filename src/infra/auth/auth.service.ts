@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AuthResponseDto } from '../../domain/@types/dto/auth/AuthResponseDto';
 import { LoginRequestDto } from '../../domain/@types/dto/auth/LoginResquestDto';
 import { RegisterRequestDto } from '../../domain/@types/dto/auth/ResgisterRequestDto';
+import { UserProfileDto } from '../../domain/@types/dto/auth/UserProfileDto';
 import { NotAllowedError } from '../../domain/errors/NotAllowedError';
 import { ResourceNotFoundError } from '../../domain/errors/ResourceNotFoundError';
 import { AuthUseCase } from '../../domain/interfaces/usecases/AuthUseCase';
@@ -59,5 +60,9 @@ export class AuthService extends AuthUseCase {
     );
 
     return isPasswordCorrect ? user : null;
+  }
+
+  async findProfileById(id: string): Promise<UserProfileDto> {
+    return this.userUseCase.findProfileById(id);
   }
 }
